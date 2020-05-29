@@ -78,12 +78,16 @@ describe('Redux', () => {
 
     expect(wrapper.find('input').length > 0, "No input elements found in the application").to.equal(true)
     let input = wrapper.find('input').first()
+    
     let form = wrapper.find('form')
+    console.log("logging check", input.debug())
 
     expect(store.getState().bands, "'bands' not found in the store").to.exist
     expect(store.getState().bands, "Initial state of 'bands' should be an empty array").to.be.empty
 
-    input.simulate('change', { target: { value: 'Hello' } })
+    input.simulate('change', { target: { name: "name", value: 'Hello' } })
+    console.log("logging check #2", input.debug())
+    
     form.simulate('submit',  { preventDefault() {} })
 
     expect(store.getState().bands[0].name).to.equal("Hello")
